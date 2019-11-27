@@ -11,13 +11,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
+    "plugins": [
+      {
+        "name": "typescript-lit-html-plugin",
+        "tags": ["html", "template"]
+      }
     ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "paths": {
+      "store": ["src/store.ts"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

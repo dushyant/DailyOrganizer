@@ -13,7 +13,7 @@ import { MyDayComponent } from './container/myday/myday.component';
 import { DayControlsComponent } from './components/day-controls/day-controls.component';
 import { WeekControlsComponent } from './components/week-controls/week-controls.component';
 import { CalendarControlsComponent } from './components/calendar-controls/calendar-controls.component';
-import { MealsSectionComponent } from './components/myday-section/myday-section.component';
+import { MyDaySectionComponent } from './components/myday-section/myday-section.component';
 import { AddItemsComponent } from './components/add-items/add-items.component';
 
 export const ROUTES: Routes = [
@@ -26,7 +26,7 @@ export const ROUTES: Routes = [
     CalendarControlsComponent,
     WeekControlsComponent,
     DayControlsComponent,
-    MealsSectionComponent,
+    MyDaySectionComponent,
     AddItemsComponent
   ],
   imports: [

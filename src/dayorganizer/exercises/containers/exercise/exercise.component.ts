@@ -28,7 +28,7 @@ import { Exercise, ExercisesService } from '../../../shared/services/exercises/e
           (remove)="removeExercise($event)">
         </exercise-form>
       </div>
-      <ng-template>
+      <ng-template #loading>
         <div class="message">Loading...</div>
       </ng-template>
     </div>

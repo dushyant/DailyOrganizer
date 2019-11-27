@@ -28,7 +28,7 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
           (remove)="removeMeal($event)">
         </meal-form>
       </div>
-      <ng-template>
+      <ng-template #loading>
         <div class="message">Loading...</div>
       </ng-template>
     </div>

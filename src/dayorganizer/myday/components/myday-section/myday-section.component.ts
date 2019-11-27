@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
+import { Meal } from './../../../shared/services/meals/meals.service';
+import { Exercise } from './../../../shared/services/exercises/exercises.service';
 import { DayItem } from './../../../shared/services/myday/myday.service';
+
 
 @Component({
   selector: 'myday-section',
@@ -40,7 +43,7 @@ import { DayItem } from './../../../shared/services/myday/myday.service';
     </div>
   `
 })
-export class MealsSectionComponent {
+export class MyDaySectionComponent {
 
   @Input()
   name: string;
@@ -51,7 +54,7 @@ export class MealsSectionComponent {
   @Output()
   select = new EventEmitter<any>();
 
-  onSelect(type: string, assigned: string[] = []) {
+  onSelect(type: string, assigned: Meal[] | Exercise[] = []) {
     const data = this.daySection;
     this.select.emit({
       type,

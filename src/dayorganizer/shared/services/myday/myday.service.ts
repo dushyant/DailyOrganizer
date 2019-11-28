@@ -86,8 +86,7 @@ export class MyDayService {
 
     }),
     switchMap(({ startAt, endAt }: any) => {
-      const getDayValue = this.getDay(startAt, endAt).valueChanges();
-      return getDayValue;
+      return this.getDay(startAt, endAt).valueChanges();
     }),
     map((data: any) => {
      
@@ -96,6 +95,8 @@ export class MyDayService {
       for(let prop of data) {     
         if(!mapped[prop.section]) {
           mapped[prop.section] = prop;
+        } else {
+          mapped[prop.section] = {...mapped[prop.section], ...prop};
         }
       }
       
@@ -137,9 +138,8 @@ export class MyDayService {
   }
 
   private getDay(startAt: number, endAt: number) {
-    return this.afdb.list(`myday/${this.uid}`, (ref) => {
-      return ref.orderByChild('timestamp').startAt(startAt).endAt(endAt);
-    });
+    return this.afdb.list(`myday/${this.uid}`, 
+      ref => ref.orderByChild('timestamp').startAt(startAt).endAt(endAt));
   }
 
 }

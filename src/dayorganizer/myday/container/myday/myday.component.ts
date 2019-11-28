@@ -41,7 +41,7 @@ export class MyDayComponent implements OnInit, OnDestroy {
   myDay$: Observable<DayItem[]>;
   selected$: Observable<any>;
   list$: Observable<Meal[] | Exercise[]>;
-  subscriptions: Subscription[];
+  subscriptions: Subscription[] = [];
   
   constructor(
     private myDayService: MyDayService,
@@ -74,7 +74,7 @@ export class MyDayComponent implements OnInit, OnDestroy {
     this.myDayService.updateDate(date);
   }
 
-  changeSection(event: any) {   
+  changeSection(event: any) {       
     this.open = true;    
     this.myDayService.selectSection(event);    
   }

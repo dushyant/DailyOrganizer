@@ -17,6 +17,7 @@ import { Router } from "@angular/router";
           {{ error }}
         </div>
       </auth-form>
+      <dushyant-info></dushyant-info>
     </div>
   `
 })

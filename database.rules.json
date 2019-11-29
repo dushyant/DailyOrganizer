@@ -6,7 +6,7 @@
         ".write": "$uid === auth.uid"
       }
     },
-    "schedule": {
+    "myday": {
       "$uid": {
         ".read": "$uid === auth.uid",
         ".write": "$uid === auth.uid",
@@ -19,7 +19,7 @@
         ".write": "$uid === auth.uid"
       }
     },
-    "workouts": {
+    "exercises": {
       "$uid": {
         ".read": "$uid === auth.uid",
         ".write": "$uid === auth.uid"

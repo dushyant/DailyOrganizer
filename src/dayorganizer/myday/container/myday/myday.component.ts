@@ -8,8 +8,6 @@ import { MyDayService, DayItem } from './../../../shared/services/myday/myday.se
 import { Exercise, ExercisesService } from './../../../shared/services/exercises/exercises.service';
 import { Meal, MealsService } from './../../../shared/services/meals/meals.service';
 
-
-
 @Component({
   selector: 'my-day',
   styleUrls: ['myday.component.scss'],

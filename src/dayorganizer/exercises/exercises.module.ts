@@ -2,6 +2,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Shared Module
 import { SharedModule } from './../shared/shared.module';
@@ -29,7 +30,8 @@ export const ROUTES: Routes = [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(ROUTES),
-    SharedModule
+    SharedModule,
+    FontAwesomeModule
   ]
 })
 export class ExercisesModule {}

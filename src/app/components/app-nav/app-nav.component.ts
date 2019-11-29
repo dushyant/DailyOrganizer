@@ -1,21 +1,40 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
+import { faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import { User } from './../../../auth/shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-nav',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['app-nav.component.scss'],
   template: `
-    <div class="app-nav">
-      <div class="wrapper">
-        <a routerLink="myday" routerLinkActive="active">My Day</a>
-        <a routerLink="tasks" routerLinkActive="active">Tasks</a>
-        <a routerLink="meals" routerLinkActive="active">Meals</a>
-        <a routerLink="exercises" routerLinkActive="active">Exercises</a>
-      </div>
+  <div class="navbar-expand">
+    <div class="navbar-nav">
+      <a routerLink="myday" class="nav-item nav-link" routerLinkActive="active">My Day</a>
+      <a routerLink="tasks" class="nav-item nav-link" routerLinkActive="active">Tasks</a>
+      <a routerLink="meals" class="nav-item nav-link" routerLinkActive="active">Meals</a>
+      <a routerLink="exercises" class="nav-item nav-link" routerLinkActive="active">Exercises</a>
+      <a 
+        routerLink="myday"
+        class="nav-item nav-link" 
+        title="Sign out"
+        (click)="logoutUser()">
+        <fa-icon class="sign-out" [icon]="faSignOutAlt"></fa-icon>
+      </a>
     </div>
+  </div>
   `
 })
 export class AppNavComponent {
-  constructor() {}
+  faSignOutAlt = faSignOutAlt;
+
+  @Input()
+  currentUser: User;
+
+  @Output()
+  logout = new EventEmitter<any>();
+
+  logoutUser() {
+    this.logout.emit();
+  }
 }

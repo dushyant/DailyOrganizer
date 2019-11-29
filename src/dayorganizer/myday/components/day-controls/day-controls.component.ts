@@ -5,15 +5,16 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['day-controls.component.scss'],
   template: `
-    <div class="days">
-      
-      <button
-        type="button"
-        class="day"
-        *ngFor="let day of days; index as i;"
-        (click)="selectDay(i)">
-        <span [class.active]="i === selectedDayIndex"> {{ day }} </span>
-      </button>
+    <div class="d-flex justify-content-around day-controls">
+      <div>
+        <button
+          type="button"
+          [ngClass]="(i === selectedDayIndex) ? 'btn btn-secondary active' : 'btn btn-secondary'"
+          *ngFor="let day of days; index as i;"
+          (click)="selectDay(i)">
+          <span > {{ day }} </span>
+        </button>
+      </div>
     </div>
   `
 })

@@ -2,18 +2,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { TasksComponent } from './container/tasks/tasks.component';
+import { MyTasksComponent } from './container/mytasks/my-tasks.component';
 
 export const ROUTES: Routes = [
-  { path: '', component:TasksComponent}
+  { path: '', component:MyTasksComponent}
 ]
 
-
 @NgModule({
-  declarations: [TasksComponent],
+  declarations: [MyTasksComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES)
   ]
 })
-export class TasksModule {}
+export class MyTasksModule {}

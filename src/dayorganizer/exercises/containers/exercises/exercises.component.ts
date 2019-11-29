@@ -1,10 +1,10 @@
 import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { faPlus, faDumbbell } from "@fortawesome/free-solid-svg-icons"
 
 import { Store } from 'store';
 
 import { ExercisesService, Exercise } from '../../../shared/services/exercises/exercises.service';
-
 
 @Component({
   selector: 'exercises',
@@ -12,18 +12,30 @@ import { ExercisesService, Exercise } from '../../../shared/services/exercises/e
   template: `
     <div class="exercises">
       <div class="exercises__title">
-        <h1>My Exercises</h1>
-        <a class="btn__add" [routerLink]="['../exercises/new']">New Exercises</a>
+        <h1 class="text-dark">
+          <fa-icon class="text-dark mr-1" [icon]="faDumbbell"></fa-icon>
+          My Exercises
+        </h1>
+        <button
+          type="button"
+          class="btn btn-success btn-sm rounded-lg"
+          [routerLink]="['../exercises/new']">
+          <fa-icon [icon]="faPlus"></fa-icon>
+          New Exercise
+        </button>
       </div>
       <div *ngIf="exercises$ | async as exercises; else loading;">
         <div class="message" *ngIf="!exercises.length">
           No exercises. Add a new exercises.
         </div>
-        <list-item 
-          *ngFor="let exercise of exercises"
-          [item]="exercise"
-          (remove)="removeExercise($event)">
-        </list-item>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let exercise of exercises">
+            <list-item 
+              [item]="exercise"
+              (remove)="removeExercise($event)">
+            </list-item>
+          </li>
+        </ul>
       </div>
       <ng-template #loading>
         <div class="message">Loading...</div>
@@ -32,6 +44,9 @@ import { ExercisesService, Exercise } from '../../../shared/services/exercises/e
   `
 })
 export class ExercisesComponent implements OnInit, OnDestroy {
+
+  faDumbbell = faDumbbell;
+  faPlus = faPlus;
 
   exercises$: Observable<Exercise[]>;
   subscription: Subscription;

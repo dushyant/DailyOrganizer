@@ -5,43 +5,53 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   selector: "auth-form",
   styleUrls: ["auth-form.component.scss"],
   template: `
-    <div class="auth-form">
+    <div class="auth-form card border-primary">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <ng-content select="h1"></ng-content>
-
-        <label>
-          <input
-            type="email"
-            placeholder="Email address"
-            formControlName="email"
-          />
-        </label>
-
-        <label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            formControlName="password"
-          />
-        </label>
-
-        <div class="error" *ngIf="emailFormatInvalid">
-          Invalid email format
+        <div class="card-header text-primary">
+          <ng-content select="h1"></ng-content>
         </div>
 
-        <div class="error" *ngIf="passwordInvalid">
-          Password is required
+        <div class="form-wrapper">
+          <div class="form-group">
+            <label for="inputEmail1">Email address</label>
+            <input
+              id="inputEmail"
+              type="email"
+              class="form-control"
+              placeholder="Email address"
+              formControlName="email"
+            />
+            <div class="alert alert-danger" *ngIf="emailFormatInvalid">
+              Invalid email format
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword">Passwod</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter password"
+                formControlName="password"
+              />
+              <div class="alert alert-danger" *ngIf="passwordInvalid">
+                Password is required
+              </div>
+          </div>
+
+          <ng-content select=".alert-danger"></ng-content>
+
+          <div class="auth-form__action">
+            <ng-content select="button"></ng-content>
+          </div>
+
         </div>
 
-        <ng-content select=".error"></ng-content>
-
-        <div class="auth-form__action">
-          <ng-content select="button"></ng-content>
-        </div>
-
-        <div class="auth-form__toggle">
-          <ng-content select="a"></ng-content>
-        </div>
+          <div class="auth-form__toggle">
+            <div class="card-footer bg-transparent border-primary">
+              <ng-content select="a"></ng-content>
+            </div>
+          </div>
       </form>
     </div>
   `

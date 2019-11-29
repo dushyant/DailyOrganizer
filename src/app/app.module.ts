@@ -1,6 +1,7 @@
-import { TasksModule } from './../dayorganizer/tasks/tasks.module';
+import { MyTasksModule } from '../dayorganizer/mytasks/mytasks.module';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { Store } from 'store';
 
@@ -30,7 +31,8 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
     DayOrganizerModule,
     ExercisesModule,
     MyDayModule,
-    TasksModule
+    MyTasksModule,
+    FontAwesomeModule
   ],
   providers: [Store],
   bootstrap: [AppComponent]

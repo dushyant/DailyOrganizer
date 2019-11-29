@@ -2,6 +2,7 @@ import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons"
 
 import { Exercise, ExercisesService } from '../../../shared/services/exercises/exercises.service';
 
@@ -13,10 +14,13 @@ import { Exercise, ExercisesService } from '../../../shared/services/exercises/e
       <div class="exercise__title">
         <h1>
           <span *ngIf="exercise$ | async as exercise; else title">
-          {{ exercise.name ? 'Edit' : 'Create'}} exercise
+            <fa-icon class="text-dark mr-1" [icon]="faDumbbell"></fa-icon>
+            {{ exercise.name ? 'Edit' : 'Create'}} exercise
           </span>
           <ng-template #title>
-            Loading
+            <div class="spinner-grow spinner-grow-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </ng-template>
         </h1>
       </div>
@@ -29,12 +33,18 @@ import { Exercise, ExercisesService } from '../../../shared/services/exercises/e
         </exercise-form>
       </div>
       <ng-template #loading>
-        <div class="message">Loading...</div>
+        <div class="p-3 d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </ng-template>
     </div>
   `
 })
 export class ExerciseComponent implements OnInit, OnDestroy {
+
+  faDumbbell = faDumbbell;
 
   exercise$: Observable<any>;
   subscription: Subscription

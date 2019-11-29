@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'tasks',
-  styleUrls: ['tasks.component.scss'],
+  selector: 'my-tasks',
+  styleUrls: ['my-tasks.component.scss'],
   template: `
     <div>Tasks</div>
   `
 })
-export class TasksComponent {
+export class MyTasksComponent {
   constructor() {}
 }

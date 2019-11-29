@@ -1,32 +1,43 @@
 import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 import { User } from './../../../auth/shared/services/auth/auth.service';
 
+import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons'
+
+
 @Component({
   selector: 'app-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['app-header.component.scss'],
   template: `
     <div class="app-header">
-      <div class="wrapper">
-      <h2>Daily Organizer</h2>
-        <div 
-          class="app-header__user-info"
-          *ngIf="user?.authenticated">
-          <span (click)="logoutUser()">Logout</span>
-        </div>
-      </div>
+      <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" routerLink="myday">
+          <fa-icon [icon]="faCalendarCheck"></fa-icon>
+          Daily Organizer
+        </a>
+        <app-nav
+          [currentUser]="user"
+          (logout)="onLogout()">
+        </app-nav>
+      </nav>
     </div>
   `
 })
 export class AppHeaderComponent {
 
+  faCalendarCheck = faCalendarCheck;
+
   @Input()
   user: User;
 
   @Output()
+  currentUser: User = this.user;
+
+  @Output()
   logout = new EventEmitter<any>();
 
-  logoutUser() {
+  onLogout() {
     this.logout.emit();
   }
+
 }

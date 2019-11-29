@@ -1,38 +1,37 @@
 .myday-section {
+  font-family: 'Fira Sans Condensed', sans-serif;
+
   &__bar {
     padding: 10px 0;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1.1rem;
     text-align: center;
     text-transform: uppercase;
     background: #39a1e7;
     color: #fff;
   }
-  &__type {
-    padding: 10px 0;
-    font-weight: 500;
-    font-size: 14px;
-    text-align: center;
-    text-transform: uppercase;
-    background: #74bdee;
-    color: #fff;
-  }
   &__item {
-    cursor: pointer;
-    padding: 10px 40px;
+    padding: 10px 20px;
     display: block;
     font-weight: 400;
     color: #545e6f;
     font-size: 16px;
     font-style: italic;
-    transition: all .2s ease-in-out;
-    background: no-repeat 8px 10px;
-    background-size: 24px 24px;
     &:first-child {
       border-bottom: 1px solid #c1cedb;
     }
-    &:hover {
-      background-color: #f9f9f9;
+    fa-icon {
+      font-size: 1rem;
+    }
+    span {
+      margin-left: 10px;
+    }
+    button {
+      margin-left: 10px;
+      border-radius: 20px;
+    }
+    button.add-btn {
+      padding-right: 16px;
     }
   }
 }

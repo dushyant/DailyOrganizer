@@ -1,14 +1,15 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { faPen, faTrashAlt, faChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'list-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['list-item.component.scss'],
   template: `
-    <div class="list-item">
-      <a [routerLink]="getRoute(item)">
-        <p class="item-list__name"> {{item.name}} </p>
-        <p class="item-list__items">
+    <div class="list-item d-flex">
+      <div class="flex-grow-1">
+        <p class="item-name"> {{item.name}} </p>
+        <p class="item-items">
           <span *ngIf="item.foods; else showExercises"> 
             {{ item.foods | join }} 
           </span>        
@@ -17,35 +18,47 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
           <span> Duration: {{ item.duration }} minutes </span>
           <span *ngIf="item.notes">| Notes: {{ item.notes }} </span>
         </ng-template>
-      </a>
+      </div>
       <div 
-        *ngIf="toggled"
-        class="list-item__delete">
+        class="d-flex align-items-start item-delete"
+        *ngIf="toggled">
         <p> Delete item?</p>
         <button
-          class="confirm"
+          class="btn btn-danger btn-sm"
           type="button"
           (click)="removeItem()">
           Yes
         </button>
         <button
-          class="cancel"
+          class="btn btn-light btn-sm"
           type="button"
           (click)="toggle()">
           No
         </button>
+        <p><fa-icon class="text-muted" [icon]="faChevronLeft"></fa-icon></p>
       </div>
 
-      <button
-        class="trash"
-        type="button"
-        (click)="toggle()">
-        X
-      </button>
+      <div class="flex-shrink-1">
+        <button
+          class="btn btn-danger btn-sm"
+          type="button"
+          (click)="toggle()">
+          <fa-icon [icon]="faTrashAlt"></fa-icon>
+        </button>
+        <button 
+          class="btn btn-success btn-sm"
+          [routerLink]="getRoute(item)">
+          <fa-icon [icon]="faPen"></fa-icon>
+        </button>
+      </div>
     </div>
   `
 })
 export class ListItemComponent {
+
+  faTrashAlt = faTrashAlt;
+  faPen = faPen;
+  faChevronLeft = faChevronLeft;
 
   toggled: boolean = false;
 

@@ -10,10 +10,10 @@ import { Router } from "@angular/router";
       <auth-form (submitted)="loginUser($event)">
         <h1>Login</h1>
         <a routerLink="/auth/register">Not registerd?</a>
-        <button type="submit">
+        <button type="submit" class="btn btn-primary">
           Login
         </button>
-        <div class="error" *ngIf="error">
+        <div class="alert alert-danger" *ngIf="error">
           {{ error }}
         </div>
       </auth-form>

@@ -11,74 +11,78 @@ import { Exercise } from '../../../shared/services/exercises/exercises.service';
   template: `
     <div class="exercise-form">
       <form [formGroup]="form">
-        <div class="exercise-form__name">
-          <label>
-            <h3>Exercise name</h3>
+        <div class="exercise-form__fields">
+          <div class="form-group">
+            <label for="inputExerciseName">Exercise name</label>
             <input
               type="text"
+              class="form-control"
               placeholder="e.g. Running, Yoga, Streching"
-              formControlName="name">
-            <div class="error" *ngIf="required">
+              formControlName="name"
+              id="inputExerciseName">
+            <div class="alert alert-danger mt-1" role="alert" *ngIf="required">
               Exercise name is required
             </div>
-          </label>
-          <label>
-            <h3>Duration <span>(minutes)</span></h3>
+          </div>
+          <div class="form-group">
+            <label for="inputExerciseDuration">Duration <span>(minutes)</span></label>
             <input
               type="number"
+              class="form-control"
               placeholder="Enter exercise duration"
-              formControlName="duration">
-            <div class="error" *ngIf="required">
-              Duration is required
-            </div>
-          </label>
-          <label>
-            <h3>Notes <span>(optional)</span></h3>
+              formControlName="duration"
+              id="inputExerciseDuration">
+          </div>
+          <div class="form-group">
+            <label for="textareaNotes">Notes <span>(optional)</span></label>
             <textarea
               type="type"
+              class="form-control"
               placeholder="Enter exercise notes"
-              formControlName="notes">
+              formControlName="notes"
+              id="textareaNotes">
             </textarea>
-          </label>
+          </div>
         </div>
-
-        <div class="exercise-form__submit">
-          <div>
+        <div class="p-4 d-flex">
+          <div class="flex-grow-1">
             <button
               type="button"
-              class="button"
+              class="btn btn-primary mr-2"
               *ngIf="!exists"
               (click)="createExercise()">
               Create exercise
             </button>
             <button
               type="button"
-              class="button"
+              class="btn btn-primary mr-2"
               *ngIf="exists"
               (click)="updateExercise()">
               Save
             </button>
-            <a 
-              class="button button--cancel"
+            <button 
+              type="button"
+              class="btn btn-light"
               [routerLink]="['../']">
               Cancel
-            </a>
+            </button>
           </div>
 
-          <div class="exercise-form__delete" *ngIf="exists">
-            <div *ngIf="toggled">
-              <p> Delete exercise?</p>
-              <button class="confirm"  type="button" (click)="removeExercise()">
+          <div class="d-flex flex-shrink-1" *ngIf="exists">
+            <div class="d-flex align-items-start item-delete" *ngIf="toggled">
+              <p class="mr-2"> Delete exercise?</p>
+              <button class="btn btn-danger btn-sm mr-2"  type="button" (click)="removeExercise()">
                 Yes
               </button>
-              <button class="cancel" type="button" (click)="toggle()">
+              <button class="btn btn-light btn-sm mr-2" type="button" (click)="toggle()">
                 No
               </button>
             </div>
-
-            <button class="button button--delete" type="button" (click)="toggle()">
-              Delete
-            </button>
+            <div class="flex-shrink-1">
+              <button class="btn btn-danger" type="button" (click)="toggle()">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
     </form>

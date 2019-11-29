@@ -3,6 +3,8 @@ import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { faHamburger } from "@fortawesome/free-solid-svg-icons"
+
 import { Meal, MealsService } from '../../../shared/services/meals/meals.service';
 
 @Component({
@@ -13,10 +15,13 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
       <div class="meal__title">
         <h1>
           <span *ngIf="meal$ | async as meal; else title">
-          {{ meal.name ? 'Edit' : 'Create'}} Meal
+            <fa-icon class="text-dark mr-1" [icon]="faHamburger"></fa-icon>
+            {{ meal.name ? 'Edit' : 'Create'}} Meal
           </span>
           <ng-template #title>
-            Loading
+            <div class="spinner-grow spinner-grow-sm" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </ng-template>
         </h1>
       </div>
@@ -29,12 +34,18 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
         </meal-form>
       </div>
       <ng-template #loading>
-        <div class="message">Loading...</div>
+        <div class="p-3 d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </ng-template>
     </div>
   `
 })
 export class MealComponent implements OnInit, OnDestroy {
+
+  faHamburger = faHamburger;
 
   meal$: Observable<any>;
   subscription: Subscription

@@ -9,7 +9,7 @@ import { AuthGuard } from './../auth/shared/guards/auth.guard';
 
 export const ROUTES: Routes = [
   { path: 'myday', canActivate: [AuthGuard], loadChildren: './myday/myday.module#MyDayModule' },
-  { path: 'tasks', canActivate: [AuthGuard], loadChildren: './tasks/tasks.module#TasksModule' },
+  { path: 'tasks', canActivate: [AuthGuard], loadChildren: './mytasks/mytasks.module#MyTasksModule' },
   { path: 'meals', canActivate: [AuthGuard], loadChildren: './meals/meals.module#MealsModule' },
   { path: 'exercises', canActivate: [AuthGuard], loadChildren: './exercises/exercises.module#ExercisesModule' }
 ]

@@ -1,6 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // third-party
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -21,7 +22,8 @@ import { JoinPipe } from './pipes/join.pipe';
   imports: [
     CommonModule,
     RouterModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    FontAwesomeModule
   ],
   declarations: [
     ListItemComponent,

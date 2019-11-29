@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Meal } from '../../../shared/services/meals/meals.service';
 
 @Component({
@@ -10,78 +11,89 @@ import { Meal } from '../../../shared/services/meals/meals.service';
   template: `
     <div class="meal-form">
       <form [formGroup]="form">
-        <div class="meal-form__name">
-          <label>
-            <h3>Meal name</h3>
+        <div class="meal-form__fields">
+          <div class="form-group">
+            <label for="inputMealName">Meal name</label>
             <input
               type="text"
+              class="form-control"
               placeholder="Enter meal name"
-              formControlName="name">
+              formControlName="name"
+              id="inputMealName">
             <div class="error" *ngIf="required">
               Meal name is required
             </div>
-          </label>
-        </div>
-
-        <div class="meal-form__food">
-          <div class="meal-form__subtitle">
-            <h3>Food</h3>
-            <button
-              type="button"
-              class="meal-form__add"
-              (click)="addFood()">
-              Add food
-            </button>
-          </div>
-          <div formArrayName="foods">
-            <label *ngFor="let food of foods.controls; index as i;">
-              <input [formControlName]="i" placeholder="e.g. Oatmeal">
-              <span
-                class="meal-form__remove"
-                (click)="removeFood(i)">
-                X
-              </span>
-            </label>
           </div>
         </div>
-
-        <div class="meal-form__submit">
-          <div>
+        <div class="meal-form__fields">
+          <div class="form-group">
+            <div class="d-flex align-items-center mb-2">
+              <label class="flex-grow-1">Food</label>
+              <button
+                type="button"
+                class="btn btn-success btn-sm"
+                (click)="addFood()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Add food
+              </button>
+            </div>
+            <div formArrayName="foods">
+              <label
+                class="d-flex"
+                *ngFor="let food of foods.controls; index as i;">
+                <input
+                  class="form-control"
+                  [formControlName]="i" 
+                  placeholder="e.g. Oatmeal">
+                <button
+                  type="button"
+                  class="btn btn-danger flex-shrink-1"
+                  (click)="removeFood(i)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="meal-form__submit p-4 d-flex">
+          <div class="flex-grow-1">
             <button
               type="button"
-              class="button"
+              class="btn btn-primary mr-2"
               *ngIf="!exists"
               (click)="createMeal()">
               Create meal
             </button>
             <button
               type="button"
-              class="button"
+              class="btn btn-primary mr-2"
               *ngIf="exists"
               (click)="updateMeal()">
               Save
             </button>
-            <a 
-              class="button button--cancel"
+            <button
+              type="button"
+              class="btn btn-light"
               [routerLink]="['../']">
               Cancel
-            </a>
+            </button>
           </div>
 
-          <div class="meal-form__delete" *ngIf="exists">
-            <div *ngIf="toggled">
+          <div class=" d-flex flex-shrink-1" *ngIf="exists">
+            <div class="d-flex align-items-start item-delete" *ngIf="toggled">
               <p> Delete item?</p>
-              <button class="confirm"  type="button" (click)="removeMeal()">
+              <button class="btn btn-danger btn-sm mr-2"  type="button" (click)="removeMeal()">
                 Yes
               </button>
-              <button class="cancel" type="button" (click)="toggle()">
+              <button class="btn btn-light btn-sm mr-2" type="button" (click)="toggle()">
                 No
               </button>
             </div>
-
-            <button class="button button--delete" type="button" (click)="toggle()">
-              Delete
-            </button>
+            <div  class="flex-shrink-1">
+              <button class="btn btn-danger" type="button" (click)="toggle()">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
     </form>
@@ -89,6 +101,9 @@ import { Meal } from '../../../shared/services/meals/meals.service';
   `
 })
 export class MealFormComponent implements OnChanges {
+
+  faPlus = faPlus;
+  faTrash = faTrash;
 
   exists: Boolean = false;
   toggled: Boolean = false;

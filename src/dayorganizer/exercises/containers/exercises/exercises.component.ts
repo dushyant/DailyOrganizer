@@ -38,7 +38,11 @@ import { ExercisesService, Exercise } from '../../../shared/services/exercises/e
         </ul>
       </div>
       <ng-template #loading>
-        <div class="message">Loading...</div>
+        <div class="p-3 d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </ng-template>
     </div>
   `

@@ -15,7 +15,7 @@ import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons'
           <fa-icon [icon]="faCalendarCheck"></fa-icon>
           Daily Organizer
         </a>
-        <app-nav
+        <app-nav *ngIf="user"
           [currentUser]="user"
           (logout)="onLogout()">
         </app-nav>

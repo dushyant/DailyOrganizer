@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
     <div>
       <auth-form (submitted)="loginUser($event)">
         <h1>Login</h1>
-        <a routerLink="/auth/register">Not registerd?</a>
+        <a routerLink="/auth/register">Not registered?</a>
         <button type="submit" class="btn btn-primary">
           Login
         </button>

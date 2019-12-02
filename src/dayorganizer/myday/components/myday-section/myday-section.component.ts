@@ -2,8 +2,10 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 
 import { Meal } from './../../../shared/services/meals/meals.service';
 import { Exercise } from './../../../shared/services/exercises/exercises.service';
+import { Task } from './../../../shared/services/mytasks/mytasks.service';
+
 import { DayItem } from './../../../shared/services/myday/myday.service';
-import { faDumbbell, faHamburger, faPen, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faDumbbell, faHamburger, faPen, faPlus, faTasks } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'myday-section',
@@ -61,6 +63,30 @@ import { faDumbbell, faHamburger, faPen, faPlus } from "@fortawesome/free-solid-
           </button>
         </div>
         </ng-template>
+        <div 
+          class="myday-section__item"
+          *ngIf="daySection.tasks; else addTask">
+          <fa-icon [icon]="faTasks"></fa-icon> 
+          <span>{{ daySection.tasks | join }}</span>
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm"
+            (click)="onSelect('tasks', daySection.tasks)">
+            <fa-icon [icon]="faPen"></fa-icon>
+          </button>
+        </div>
+        <ng-template #addTask>
+        <div 
+          class="myday-section__item">
+          <fa-icon [icon]="faTasks"></fa-icon> 
+          <button
+            class="btn btn-outline-dark btn-sm add-btn"
+            (click)="onSelect('tasks')">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Add task
+          </button>
+        </div>
+        </ng-template>
       </div>
     </div>
   `
@@ -71,6 +97,7 @@ export class MyDaySectionComponent {
   faHamburger = faHamburger;
   faPen = faPen;
   faPlus = faPlus;
+  faTasks = faTasks;
 
   @Input()
   name: string;
@@ -81,7 +108,7 @@ export class MyDaySectionComponent {
   @Output()
   select = new EventEmitter<any>();
 
-  onSelect(type: string, assigned: Meal[] | Exercise[] = []) {
+  onSelect(type: string, assigned: Meal[] | Exercise[] | Task[] = []) {
     const data = this.daySection;
     this.select.emit({
       type,

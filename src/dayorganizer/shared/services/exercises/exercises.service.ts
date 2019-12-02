@@ -17,7 +17,13 @@ export interface Exercise {
 
 @Injectable()
 export class ExercisesService {
-
+  
+  constructor(
+    private store: Store,
+    private afdb: AngularFireDatabase,
+    private authService: AuthService
+    ) {}
+    
   exercises$: Observable<Exercise[]> = this.afdb.list(`exercises/${this.uid}`)
     .snapshotChanges().pipe(
       map(exercises =>
@@ -25,12 +31,6 @@ export class ExercisesService {
       ),
       tap(next => this.store.set('exercises', next))
     );
-
-  constructor(
-    private store: Store,
-    private afdb: AngularFireDatabase,
-    private authService: AuthService
-  ) {}
 
   get uid() {
     return this.authService.user.uid;

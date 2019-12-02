@@ -59,7 +59,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     this.subscription = this.exercisesService.exercises$.subscribe();
     this.exercise$ = this.route.params.pipe(
       switchMap(param => this.exercisesService.getExercises(param.id))
-      );
+    );
   }
   
   ngOnDestroy() {

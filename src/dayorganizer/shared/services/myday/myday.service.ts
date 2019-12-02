@@ -1,3 +1,4 @@
+import { Task } from './../mytasks/mytasks.service';
 import { DayItem, DayItemList } from './myday.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 
@@ -14,6 +15,7 @@ import { Meal } from './../meals/meals.service';
 export interface DayItem {
   meals: Meal[],
   exercises: Exercise[],
+  tasks: Task[],
   timestamp: number,
   section: string,
   $key?: string
@@ -53,6 +55,7 @@ export class MyDayService {
       const defaults: DayItem = {
         exercises: null,
         meals: null,
+        tasks: null,
         section: section.section,
         timestamp: new Date(section.day).getTime()
       };

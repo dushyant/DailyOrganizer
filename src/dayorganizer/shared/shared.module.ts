@@ -9,8 +9,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 // Components
 import { ListItemComponent } from './components/list-item/list-item.component';
 
-
 // services
+import { MyTaskService } from './services/mytasks/mytasks.service';
 import { MealsService } from './services/meals/meals.service';
 import { ExercisesService } from './services/exercises/exercises.service';
 import { MyDayService } from './services/myday/myday.service';
@@ -41,7 +41,8 @@ export class SharedModule {
       providers: [
         MealsService,
         ExercisesService,
-        MyDayService
+        MyDayService,
+        MyTaskService
       ]
     }
   }

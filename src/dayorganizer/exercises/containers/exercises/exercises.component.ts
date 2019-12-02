@@ -25,12 +25,13 @@ import { ExercisesService, Exercise } from '../../../shared/services/exercises/e
         </button>
       </div>
       <div *ngIf="exercises$ | async as exercises; else loading;">
-        <div class="message" *ngIf="!exercises.length">
+        <div class="message p-4" *ngIf="!exercises.length">
           No exercises. Add a new exercises.
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let exercise of exercises">
             <list-item 
+              [itemType]="itemType"
               [item]="exercise"
               (remove)="removeExercise($event)">
             </list-item>
@@ -51,6 +52,7 @@ export class ExercisesComponent implements OnInit, OnDestroy {
 
   faDumbbell = faDumbbell;
   faPlus = faPlus;
+  itemType: string = 'exercises'
 
   exercises$: Observable<Exercise[]>;
   subscription: Subscription;

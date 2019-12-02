@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from 'store';
 
 // Services
+import { Task, MyTaskService } from '../../../shared/services/mytasks/mytasks.service';
 import { MyDayService, DayItem } from './../../../shared/services/myday/myday.service';
 import { Exercise, ExercisesService } from './../../../shared/services/exercises/exercises.service';
 import { Meal, MealsService } from './../../../shared/services/meals/meals.service';
@@ -38,13 +39,14 @@ export class MyDayComponent implements OnInit, OnDestroy {
   date$: Observable<Date>;
   myDay$: Observable<DayItem[]>;
   selected$: Observable<any>;
-  list$: Observable<Meal[] | Exercise[]>;
+  list$: Observable<Meal[] | Exercise[] | Task[]>;
   subscriptions: Subscription[] = [];
   
   constructor(
     private myDayService: MyDayService,
     private mealService: MealsService,
     private exercisesService: ExercisesService,
+    private myTaskService: MyTaskService,
     private store: Store
   ) {}
 
@@ -60,7 +62,8 @@ export class MyDayComponent implements OnInit, OnDestroy {
       this.myDayService.list$.subscribe(),
       this.myDayService.items$.subscribe(),
       this.mealService.meals$.subscribe(),
-      this.exercisesService.exercises$.subscribe()
+      this.exercisesService.exercises$.subscribe(),
+      this.myTaskService.tasks$.subscribe()
     ];
   }
 

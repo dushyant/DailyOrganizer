@@ -10,9 +10,16 @@ import { faPen, faTrashAlt, faChevronLeft } from "@fortawesome/free-solid-svg-ic
       <div class="flex-grow-1">
         <p class="item-name"> {{item.name}} </p>
         <p class="item-items">
-          <span *ngIf="item.foods; else showExercises"> 
+          <span *ngIf="itemType === 'meals'"> 
             {{ item.foods | join }} 
-          </span>        
+          </span> 
+          <span *ngIf="itemType === 'exercises'"> 
+            <span> Duration: {{ item.duration }} minutes </span>
+            <span *ngIf="item.notes">| Notes: {{ item.notes }} </span>
+          </span>
+          <span *ngIf="itemType === 'tasks'"> 
+            Priority: {{ item.priority }} 
+          </span>      
         </p>
         <ng-template #showExercises>
           <span> Duration: {{ item.duration }} minutes </span>
@@ -47,7 +54,7 @@ import { faPen, faTrashAlt, faChevronLeft } from "@fortawesome/free-solid-svg-ic
         </button>
         <button 
           class="btn btn-success btn-sm"
-          [routerLink]="getRoute(item)">
+          [routerLink]="getRoute(item, itemType)">
           <fa-icon [icon]="faPen"></fa-icon>
         </button>
       </div>
@@ -65,14 +72,17 @@ export class ListItemComponent {
   @Input()
   item: any;
 
+  @Input()
+  itemType: string;
+
   @Output()
   remove = new EventEmitter<any>();
 
   constructor() {}
 
-  getRoute(item) {
+  getRoute(item, itemType) {
     return [
-      `../${ item.foods ? 'meals' : 'exercises' }`, 
+      `../${ itemType }`, 
       item.$key
     ]
   }

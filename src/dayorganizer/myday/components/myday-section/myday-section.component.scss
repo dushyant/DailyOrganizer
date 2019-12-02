@@ -17,8 +17,9 @@
     color: #545e6f;
     font-size: 16px;
     font-style: italic;
-    &:first-child {
-      border-bottom: 1px solid #c1cedb;
+    border-bottom: 1px solid #c1cedb;
+    &:last-child {
+      border-bottom: none;
     }
     fa-icon {
       font-size: 1rem;

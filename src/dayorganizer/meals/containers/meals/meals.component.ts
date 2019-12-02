@@ -25,12 +25,13 @@ import { MealsService, Meal } from '../../../shared/services/meals/meals.service
         </button>
       </div>
       <div *ngIf="meals$ | async as meals; else loading;">
-        <div class="message" *ngIf="!meals.length">
+        <div class="message p-4" *ngIf="!meals.length">
           No meals. Add a new meal.
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let meal of meals">
             <list-item 
+              [itemType]="itemType"
               [item]="meal"
               (remove)="removeMeal($event)">
             </list-item>
@@ -51,9 +52,10 @@ export class MealsComponent implements OnInit, OnDestroy {
 
   faPlus = faPlus;
   faHamburger = faHamburger;
+  itemType: string = 'meals'
 
   meals$: Observable<Meal[]>;
-  subscription: Subscription
+  subscription: Subscription;
 
   constructor(
     private store: Store,

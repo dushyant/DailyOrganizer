@@ -1,46 +1,39 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { Exercise } from '../../../shared/services/exercises/exercises.service';
+import { Task } from './../../../shared/services/mytasks/mytasks.service';
 
 @Component({
-  selector: 'exercise-form',
+  selector: 'mytask-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['exercise-form.component.scss'],
+  styleUrls: ['mytask-form.component.scss'],
   template: `
-    <div class="exercise-form">
+    <div class="mytask-form">
       <form [formGroup]="form">
-        <div class="exercise-form__fields">
+        <div class="mytask-form__fields">
           <div class="form-group">
-            <label for="inputExerciseName">Exercise name</label>
+            <label for="inputTaskName">Task name</label>
             <input
               type="text"
               class="form-control"
-              placeholder="e.g. Running, Yoga, Streching"
+              placeholder="e.g. Buy Milk"
               formControlName="name"
-              id="inputExerciseName">
+              id="inputTaskName">
             <div class="alert alert-danger mt-1" role="alert" *ngIf="required">
-              Exercise name is required
+              Task name is required
             </div>
           </div>
           <div class="form-group">
-            <label for="inputExerciseDuration">Duration <span>(minutes)</span></label>
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Enter exercise duration"
-              formControlName="duration"
-              id="inputExerciseDuration">
-          </div>
-          <div class="form-group">
-            <label for="textareaNotes">Notes <span>(optional)</span></label>
-            <textarea
-              type="type"
-              class="form-control"
-              placeholder="Enter exercise notes"
-              formControlName="notes"
-              id="textareaNotes">
-            </textarea>
+            <label for="inputTaskPriority">Priority</label>
+            <select 
+              class="form-control" 
+              formControlName="priority"
+              id="inputTaskPriority">
+              <option>Select Priority</option>
+              <option value="High" [selected]="task.priority">High</option>
+              <option value="Medium" [selected]="task.priority">Medium</option>
+              <option value="Low" [selected]="task.priority">Low</option>
+            </select>
           </div>
         </div>
         <div class="p-4 d-flex">
@@ -49,14 +42,14 @@ import { Exercise } from '../../../shared/services/exercises/exercises.service';
               type="button"
               class="btn btn-primary mr-2"
               *ngIf="!exists"
-              (click)="createExercise()">
+              (click)="createTask()">
               Create exercise
             </button>
             <button
               type="button"
               class="btn btn-primary mr-2"
               *ngIf="exists"
-              (click)="updateExercise()">
+              (click)="updateTask()">
               Save
             </button>
             <button 
@@ -69,8 +62,8 @@ import { Exercise } from '../../../shared/services/exercises/exercises.service';
 
           <div class="d-flex flex-shrink-1" *ngIf="exists">
             <div class="d-flex align-items-start item-delete" *ngIf="toggled">
-              <p class="mr-2"> Delete exercise?</p>
-              <button class="btn btn-danger btn-sm mr-2"  type="button" (click)="removeExercise()">
+              <p class="mr-2"> Delete task?</p>
+              <button class="btn btn-danger btn-sm mr-2"  type="button" (click)="removeTask()">
                 Yes
               </button>
               <button class="btn btn-light btn-sm mr-2" type="button" (click)="toggle()">
@@ -83,43 +76,42 @@ import { Exercise } from '../../../shared/services/exercises/exercises.service';
               </button>
             </div>
           </div>
-        </div>
-    </form>
-  </div>
+          </div>
+      </form>
+    </div>
   `
 })
-export class ExerciseFormComponent implements OnChanges {
+export class MyTaskFormComponent implements OnChanges {
 
   exists: Boolean = false;
   toggled: Boolean = false;
 
   @Input()
-  exercise: Exercise
+  task: Task
 
   @Output()
-  create = new EventEmitter<Exercise>();
+  create = new EventEmitter<Task>();
 
   @Output()
-  update = new EventEmitter<Exercise>();
+  update = new EventEmitter<Task>();
 
   @Output()
-  remove =new EventEmitter<Exercise>();
+  remove =new EventEmitter<Task>();
 
   form = this.formBuilder.group({
     name: ['', Validators.required],
-    duration: [0, Validators.required],
-    notes: ['']
+    priority: ['Medium', Validators.required]
   });
-
+  
   constructor(
     private formBuilder: FormBuilder
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.exercise && this.exercise.name) {
+    if (this.task && this.task.name) {
       this.exists = true;
 
-      const value = this.exercise;
+      const value = this.task;
       this.form.patchValue(value);
     }
   }
@@ -131,19 +123,19 @@ export class ExerciseFormComponent implements OnChanges {
     )
   }
 
-  createExercise() {
+  createTask() {
     if (this.form.valid) {
       this.create.emit(this.form.value);
     }
   }
 
-  updateExercise() {
+  updateTask() {
     if (this.form.valid) {
       this.update.emit(this.form.value);
     }
   }
 
-  removeExercise() {
+  removeTask() {
     this.remove.emit(this.form.value);
   }
 

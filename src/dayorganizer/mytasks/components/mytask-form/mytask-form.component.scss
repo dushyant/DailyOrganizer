@@ -1,0 +1,21 @@
+.mytask-form {
+  &__fields {
+    padding: 20px;
+    flex-direction: column;
+    border-bottom: 1px solid #d1deeb;
+  }
+  h1 {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+  }
+  textarea {
+    resize: none;
+  }
+  .item-delete {
+    margin-top: 3px;
+  }
+}

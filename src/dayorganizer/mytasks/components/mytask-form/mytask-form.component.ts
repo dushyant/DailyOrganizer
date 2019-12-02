@@ -43,7 +43,7 @@ import { Task } from './../../../shared/services/mytasks/mytasks.service';
               class="btn btn-primary mr-2"
               *ngIf="!exists"
               (click)="createTask()">
-              Create exercise
+              Create task
             </button>
             <button
               type="button"

@@ -67,18 +67,18 @@ export class MyTaskComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  async addTask(exercise: Task) {
-    await this.myTaskService.addTask(exercise);
+  async addTask(task: Task) {
+    await this.myTaskService.addTask(task);
     this.backToTask();
   }
 
-  async updateTask(exercise: Task) {
+  async updateTask(task: Task) {
     const key = this.route.snapshot.params.id;
-    await this.myTaskService.updateTask(key, exercise);
+    await this.myTaskService.updateTask(key, task);
     this.backToTask();
   }
 
-  async removeTask(exercise: Task) {
+  async removeTask(task: Task) {
     const key = this.route.snapshot.params.id;
     await this.myTaskService.removeTask(key);
     this.backToTask();

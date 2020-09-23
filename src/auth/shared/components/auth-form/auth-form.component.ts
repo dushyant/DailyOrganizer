@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
         <div class="form-wrapper">
           <div class="form-group">
-            <label for="inputEmail1">Email address</label>
+            <label for="inputEmail">Email address</label>
             <input
               id="inputEmail"
               type="email"

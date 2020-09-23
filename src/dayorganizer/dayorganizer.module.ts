@@ -8,10 +8,26 @@ import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './../auth/shared/guards/auth.guard';
 
 export const ROUTES: Routes = [
-  { path: 'myday', canActivate: [AuthGuard], loadChildren: './myday/myday.module#MyDayModule' },
-  { path: 'tasks', canActivate: [AuthGuard], loadChildren: './mytasks/mytasks.module#MyTasksModule' },
-  { path: 'meals', canActivate: [AuthGuard], loadChildren: './meals/meals.module#MealsModule' },
-  { path: 'exercises', canActivate: [AuthGuard], loadChildren: './exercises/exercises.module#ExercisesModule' }
+  { 
+    path: 'myday',
+    canActivate: [AuthGuard], 
+    loadChildren: () => import('./myday/myday.module').then(m => m.MyDayModule)
+  },
+  { 
+    path: 'tasks',
+    canActivate: [AuthGuard], 
+    loadChildren: () => import('./mytasks/mytasks.module').then(m => m.MyTasksModule)
+  },
+  { 
+    path: 'meals',
+    canActivate: [AuthGuard], 
+    loadChildren: () => import('./meals/meals.module').then(m => m.MealsModule)
+  },
+  { 
+    path: 'exercises',
+    canActivate: [AuthGuard], 
+    loadChildren: () => import('./exercises/exercises.module').then(m => m.ExercisesModule)
+   }
 ]
 
 @NgModule({

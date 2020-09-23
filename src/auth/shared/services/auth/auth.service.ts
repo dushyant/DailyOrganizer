@@ -12,6 +12,7 @@ export interface User {
 
 @Injectable()
 export class AuthService {
+  
   auth$ = this.afa.authState.pipe(
     tap(next => {
       if (!next) {

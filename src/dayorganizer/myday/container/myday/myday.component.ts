@@ -1,24 +1,37 @@
-import { Observable, Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from "rxjs";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 
-import { Store } from 'store';
+import { Store } from "store";
 
 // Services
-import { Task, MyTaskService } from '../../../shared/services/mytasks/mytasks.service';
-import { MyDayService, DayItem } from './../../../shared/services/myday/myday.service';
-import { Exercise, ExercisesService } from './../../../shared/services/exercises/exercises.service';
-import { Meal, MealsService } from './../../../shared/services/meals/meals.service';
+import {
+  Task,
+  MyTaskService,
+} from "../../../shared/services/mytasks/mytasks.service";
+import {
+  MyDayService,
+  DayItem,
+} from "./../../../shared/services/myday/myday.service";
+import {
+  Exercise,
+  ExercisesService,
+} from "./../../../shared/services/exercises/exercises.service";
+import {
+  Meal,
+  MealsService,
+} from "./../../../shared/services/meals/meals.service";
 
 @Component({
-  selector: 'my-day',
-  styleUrls: ['myday.component.scss'],
+  selector: "my-day",
+  styleUrls: ["myday.component.scss"],
   template: `
     <div class="my-day">
-      <calendar-controls 
+      <calendar-controls
         [date]="date$ | async"
         [dayItems]="myDay$ | async"
         (change)="changeDate($event)"
-        (select)="changeSection($event)">
+        (select)="changeSection($event)"
+      >
       </calendar-controls>
 
       <add-items
@@ -26,14 +39,13 @@ import { Meal, MealsService } from './../../../shared/services/meals/meals.servi
         [section]="selected$ | async"
         [list]="list$ | async"
         (update)="addItems($event)"
-        (cancel)="closeAddItemModal()">
+        (cancel)="closeAddItemModal()"
+      >
       </add-items>
-
     </div>
-  `
+  `,
 })
 export class MyDayComponent implements OnInit, OnDestroy {
-
   open: boolean = false;
 
   date$: Observable<Date>;
@@ -41,7 +53,7 @@ export class MyDayComponent implements OnInit, OnDestroy {
   selected$: Observable<any>;
   list$: Observable<Meal[] | Exercise[] | Task[]>;
   subscriptions: Subscription[] = [];
-  
+
   constructor(
     private myDayService: MyDayService,
     private mealService: MealsService,
@@ -51,10 +63,10 @@ export class MyDayComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.date$ = this.store.select('date');
-    this.myDay$ = this.store.select('myday');
-    this.selected$ = this.store.select('selected');
-    this.list$ = this.store.select('list');
+    this.date$ = this.store.select("date");
+    this.myDay$ = this.store.select("myday");
+    this.selected$ = this.store.select("selected");
+    this.list$ = this.store.select("list");
 
     this.subscriptions = [
       this.myDayService.myday$.subscribe(),
@@ -63,24 +75,24 @@ export class MyDayComponent implements OnInit, OnDestroy {
       this.myDayService.items$.subscribe(),
       this.mealService.meals$.subscribe(),
       this.exercisesService.exercises$.subscribe(),
-      this.myTaskService.tasks$.subscribe()
+      this.myTaskService.tasks$.subscribe(),
     ];
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   changeDate(date: Date) {
     this.myDayService.updateDate(date);
   }
 
-  changeSection(event: any) {       
-    this.open = true;    
-    this.myDayService.selectSection(event);    
+  changeSection(event: any) {
+    this.open = true;
+    this.myDayService.selectSection(event);
   }
 
-  addItems(items: string[]) {   
+  addItems(items: string[]) {
     this.myDayService.addItems(items);
     this.closeAddItemModal();
   }
